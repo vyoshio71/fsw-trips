@@ -1,7 +1,11 @@
-import Image from 'next/image'
+'use client';
+
+import { signIn } from "next-auth/react";
 
 export default function Home() {
   return (
-    <h1>HomePage</h1>
-  )
+    <div>
+      
+    </div>
+  );
 }
