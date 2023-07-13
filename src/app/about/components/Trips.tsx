@@ -1,12 +1,12 @@
-'use client';
+import { prisma } from "@/app/lib/prisma";
+import { useEffect, useState } from "react";
 
-import { useState } from "react";
+const getTrips = async () => {
+  const trips = await prisma.trip.findMany({});
+  return trips;
+};
 
-const Trips = () => {
-    const [name, setName] = useState();
-  return (
-    <div>Trips</div>
-  )
-}
-
-export default Trips
+const Trips = async () => {
+  return <div>get</div>;
+};
+export default Trips;
