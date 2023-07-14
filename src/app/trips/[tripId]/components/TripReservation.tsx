@@ -3,7 +3,6 @@ import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
 import { Trip } from "@prisma/client";
-import React from "react";
 
 interface TripReservationProps {
   trip: Trip;
