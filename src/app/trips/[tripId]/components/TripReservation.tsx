@@ -2,14 +2,14 @@
 import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
-import { Trip } from "@prisma/client";
+import { differenceInDays } from "date-fns";
 import { useForm, Controller } from "react-hook-form";
-
 
 interface TripReservationProps {
   tripStartDate: Date;
   tripEndDate: Date;
-  maxGuests: number;
+  maxGuests: Number;
+  pricePerDay: any;
 }
 
 interface TripReservationForm {
@@ -18,7 +18,12 @@ interface TripReservationForm {
   endDate?: Date | null;
 }
 
-function TripReservation({ maxGuests ,tripEndDate, tripStartDate }: TripReservationProps) {
+const TripReservation = ({
+  maxGuests,
+  tripEndDate,
+  tripStartDate,
+  pricePerDay,
+}: TripReservationProps) => {
   const {
     register,
     handleSubmit,
@@ -31,7 +36,8 @@ function TripReservation({ maxGuests ,tripEndDate, tripStartDate }: TripReservat
     console.log(data);
   };
 
-  const startDate = watch("startDate")
+  const startDate = watch("startDate");
+  const endDate = watch("endDate");
 
   return (
     <div className="flex flex-col px-5">
@@ -47,7 +53,7 @@ function TripReservation({ maxGuests ,tripEndDate, tripStartDate }: TripReservat
           control={control}
           render={({ field }) => (
             <DatePicker
-              error={!!errors?.startDate} 
+              error={!!errors?.startDate}
               errorMessage={errors?.startDate?.message}
               onChange={field.onChange}
               selected={field.value}
@@ -69,7 +75,7 @@ function TripReservation({ maxGuests ,tripEndDate, tripStartDate }: TripReservat
           control={control}
           render={({ field }) => (
             <DatePicker
-              error={!!errors?.endDate} 
+              error={!!errors?.endDate}
               errorMessage={errors?.endDate?.message}
               onChange={field.onChange}
               selected={field.value}
@@ -97,7 +103,9 @@ function TripReservation({ maxGuests ,tripEndDate, tripStartDate }: TripReservat
 
       <div className="flex justify-between mt-3">
         <p className="font-medium text-sm text-primaryDarker">Total: </p>
-        <p className="font-medium text-sm text-primaryDarker">R$2500 </p>
+        <p className="font-medium text-sm text-primaryDarker">
+        {startDate && endDate ? `R$${differenceInDays(endDate, startDate) * pricePerDay}` ?? 1 : "R$0"}
+        </p>
       </div>
 
       <div className="pb-10 border-b border-grayLighter w-full">
