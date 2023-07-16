@@ -1,17 +1,23 @@
 "use client";
 
-import { Trip } from "@prisma/client";
-import format from "date-fns/format";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import format from "date-fns/format";
 import ReactCountryFlag from "react-country-flag";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import ptBR from "date-fns/locale/pt-BR";
+import { Trip } from "@prisma/client";
 import Button from "@/components/Button";
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  const router = useRouter();
+
+  const { status } = useSession();
 
   const searchParams = useSearchParams();
 
@@ -32,8 +38,12 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
       setTotalPrice(totalPrice);
     };
 
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+
     fecthTrip();
-  }, []);
+  }, [status]);
 
   if (!trip) return null;
 
