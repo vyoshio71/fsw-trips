@@ -32,9 +32,7 @@ const UserReservationItem = ({
     }
 
     toast.success("Reserva cancelada com sucesso!", {position: 'bottom-center'});
-
-    router.refresh();
-
+    
     fetchReservations();
   };
 
