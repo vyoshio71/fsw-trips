@@ -1,9 +1,9 @@
-import { Prisma } from "@prisma/client";
-import { ptBR } from "date-fns/locale";
-import Image from "next/image";
-import { format } from "date-fns";
 import React from "react";
+import Image from "next/image";
+import { Prisma } from "@prisma/client";
 import ReactCountryFlag from "react-country-flag";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import Button from "@/components/Button";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -20,6 +20,7 @@ const UserReservationItem = ({
   fetchReservations,
 }: UserReservationItemProps) => {
   const router = useRouter();
+  
   const { trip } = reservation;
 
   const handleDeleteClick = async () => {

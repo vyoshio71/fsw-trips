@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Prisma } from "@prisma/client";
+import Link from "next/link";
+
 import UserReservationItem from "./components/UserReservationItem";
 import Button from "@/components/Button";
-import Link from "next/link";
 
 const MyTrips = () => {
   const [reservations, setReservations] = useState<
@@ -20,8 +21,9 @@ const MyTrips = () => {
 
   const fetchReservations = async () => {
     const response = await fetch(
-      `http://localhost:3000/api/user/${(data?.user as any)?.id}/reservations`
+      `/api/user/${(data?.user as any)?.id}/reservations`
     );
+
     const json = await response.json();
 
     setReservations(json);

@@ -29,7 +29,9 @@ export default function RootLayout({
               <div className="h-[94px]">
                 <Header />
               </div>
+
               <div className="flex-1">{children}</div>
+
               <Footer />
             </div>
           </ToastProvider>

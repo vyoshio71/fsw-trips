@@ -24,8 +24,8 @@ export async function POST(request: Request) {
       data: {
         startDate: new Date(session.metadata.startDate),
         endDate: new Date(session.metadata.endDate),
-        tripId: session.metadata.tripId,
         userId: session.metadata.userId,
+        tripId: session.metadata.tripId,
         totalPaid: Number(session.metadata.totalPrice),
         guests: Number(session.metadata.guests),
       },

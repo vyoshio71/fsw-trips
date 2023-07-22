@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import format from "date-fns/format";
+import { format } from "date-fns";
 import ReactCountryFlag from "react-country-flag";
 import ptBR from "date-fns/locale/pt-BR";
 import { useSession } from "next-auth/react";
@@ -26,7 +26,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const fecthTrip = async () => {
+    const fetchTrip = async () => {
       const response = await fetch(`/api/trips/check`, {
         method: "POST",
         body: JSON.stringify({
@@ -50,7 +50,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
       router.push("/");
     }
 
-    fecthTrip();
+    fetchTrip();
   }, [status, searchParams, params, router]);
 
   if (!trip) return null;
@@ -73,7 +73,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
     });
 
     if (!res.ok) {
-      return toast.success("Reserva realizada com sucesso!", {
+      return toast.error("Ocorreu um erro ao realizar a reserva!", {
         position: "bottom-center",
       });
     }
@@ -96,8 +96,10 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const guests = searchParams.get("guests");
 
   return (
-    <div className="container mx-auto p-5 ">
+    <div className="container mx-auto p-5 lg:max-w-[600px]">
       <h1 className="font-semibold text-xl text-primaryDarker">Sua viagem</h1>
+
+      {/* CARD */}
       <div className="flex flex-col p-5 mt-5 border-grayLighter border-solid border shadow-lg rounded-lg">
         <div className="flex items-center gap-3 pb-5 border-b border-grayLighter border-solid">
           <div className="relative h-[106px] w-[124px]">
@@ -105,16 +107,15 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
               src={trip.coverImage}
               fill
               style={{ objectFit: "cover" }}
-              alt={trip.name}
               className="rounded-lg"
+              alt={trip.name}
             />
           </div>
 
           <div className="flex flex-col">
-            <h2 className="text-xl text-primaryDarker font-semibold ">
+            <h2 className="text-xl text-primaryDarker font-semibold">
               {trip.name}
             </h2>
-
             <div className="flex items-center gap-1">
               <ReactCountryFlag countryCode={trip.countryCode} svg />
               <p className="text-xs text-grayPrimary underline">

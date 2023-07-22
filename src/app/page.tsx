@@ -4,7 +4,7 @@ import RecommendedTrips from "./components/RecommendedTrips";
 
 export default function Home() {
   return (
-    <div className="">
+    <div>
       <TripSearch />
       <QuickSearch />
       <RecommendedTrips />
