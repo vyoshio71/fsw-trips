@@ -1,4 +1,6 @@
 "use client";
+
+
 import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
@@ -11,7 +13,7 @@ interface TripReservationProps {
   tripStartDate: Date;
   tripEndDate: Date;
   maxGuests: number;
-  pricePerDay: any;
+  pricePerDay: number;
 }
 
 interface TripReservationForm {
@@ -21,11 +23,11 @@ interface TripReservationForm {
 }
 
 const TripReservation = ({
-  maxGuests,
-  tripEndDate,
-  tripStartDate,
-  pricePerDay,
   tripId,
+  maxGuests,
+  tripStartDate,
+  tripEndDate,
+  pricePerDay,
 }: TripReservationProps) => {
   const {
     register,
@@ -164,7 +166,7 @@ const TripReservation = ({
         </p>
       </div>
 
-      <div className="pb-10 border-b border-grayLighter w-full">
+      <div className="pb-10 border-b border-grayLighter w-full lg:border-none lg:pb-0">
         <Button
           onClick={() => handleSubmit(onSubmit)()}
           className="mt-3 w-full"

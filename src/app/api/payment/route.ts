@@ -9,9 +9,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: Request) {
   const userSession = await getServerSession(authOptions);
-  const req = await request.json();
 
-  console.log(req);
+  const req = await request.json();
 
   const {
     tripId,

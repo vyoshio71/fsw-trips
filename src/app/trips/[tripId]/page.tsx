@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+
 import React from "react";
 import TripHeader from "./components/TripHeader";
 import TripReservation from "./components/TripReservation";

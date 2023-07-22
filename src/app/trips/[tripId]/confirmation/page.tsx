@@ -5,11 +5,13 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import format from "date-fns/format";
 import ReactCountryFlag from "react-country-flag";
+import ptBR from "date-fns/locale/pt-BR";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import ptBR from "date-fns/locale/pt-BR";
-import { Trip } from "@prisma/client";
+
 import Button from "@/components/Button";
+
+import { Trip } from "@prisma/client";
 import { toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -49,7 +51,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
     }
 
     fecthTrip();
-  }, [status]);
+  }, [status, searchParams, params, router]);
 
   if (!trip) return null;
 
@@ -71,7 +73,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
     });
 
     if (!res.ok) {
-      toast.success("Reserva realizada com sucesso!", {
+      return toast.success("Reserva realizada com sucesso!", {
         position: "bottom-center",
       });
     }
