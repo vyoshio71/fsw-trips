@@ -55,13 +55,13 @@ const MyTrips = () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col">
+        <div className="flex flex-col lg:max-w-[500px] lg:container lg:mx-auto ">
           <p className=" mt-2 font-medium text-primaryDarker text-xl">
             Você ainda não tem nenhum reserva de viagem
           </p>
 
           <Link href="/">
-            <Button className="w-full mt-2">Fazer Reserva</Button>
+            <Button className="w-full mt-2 lg:mt-5">Fazer Reserva</Button>
           </Link>
         </div>
       )}
