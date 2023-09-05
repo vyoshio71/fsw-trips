@@ -11,6 +11,7 @@
 ------------------------------
 
 ## Getting Started
+- npm install or yarn add
 
 First, run the development server:
 
